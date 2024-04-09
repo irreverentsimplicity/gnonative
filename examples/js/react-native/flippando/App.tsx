@@ -1,5 +1,10 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { StyleSheet, TextInput, View } from "react-native";
+
+// order matters here
+import "react-native-polyfill-globals/auto";
+
+import { StatusBar } from "expo-status-bar";
 import { useGno } from "@gno/hooks/use-gno";
 
 // Polyfill async.Iterator. For some reason, the Babel presets and plugins are not doing the trick.
