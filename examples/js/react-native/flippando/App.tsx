@@ -1,7 +1,24 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import { useGno } from "@gno/hooks/use-gno";
+
+// Polyfill async.Iterator. For some reason, the Babel presets and plugins are not doing the trick.
+// Code from here: https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-3.html#caveats
+//(Symbol as any).asyncIterator =
+//  Symbol.asyncIterator || Symbol.for("Symbol.asyncIterator");
 
 export default function App() {
+  const gno = useGno();
+  const [board, setBoard] = React.useState("");
+
+  React.useEffect(() => {
+    gno
+      .render("gno.land/r/demo/boards", "testboard/1")
+      .then((res) => setBoard(res))
+      .catch((err) => setBoard(err));
+  }, []);
+
+
   return (
     <View style={styles.container}>
       <Text>Flippando</Text>
