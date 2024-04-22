@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, TextInput, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
 // order matters here
 import "react-native-polyfill-globals/auto";
@@ -26,7 +26,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text>Flippando</Text>
+      <Text>Flipppando</Text>
       <StatusBar style="auto" />
     </View>
   );
