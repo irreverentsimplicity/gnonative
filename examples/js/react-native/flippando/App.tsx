@@ -24,7 +24,7 @@ export default function App() {
         console.warn("res ", JSON.stringify(res))
       })
       .catch((err) => setBoard("error " + JSON.stringify(err)));
-  }, []);
+  }, []);r
 
 
   return (
