@@ -1,16 +1,16 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, TextInput, View } from "react-native";
 
 // order matters here
 import "react-native-polyfill-globals/auto";
 
 import { StatusBar } from "expo-status-bar";
-import { useGno } from "@gno/hooks/use-gno";
+import { useGno } from "./src/hooks/use-gno";
 
 // Polyfill async.Iterator. For some reason, the Babel presets and plugins are not doing the trick.
 // Code from here: https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-3.html#caveats
-//(Symbol as any).asyncIterator =
-//  Symbol.asyncIterator || Symbol.for("Symbol.asyncIterator");
+(Symbol as any).asyncIterator =
+  Symbol.asyncIterator || Symbol.for("Symbol.asyncIterator");
 
 export default function App() {
   const gno = useGno();
@@ -18,15 +18,19 @@ export default function App() {
 
   React.useEffect(() => {
     gno
-      .render("gno.land/r/demo/boards", "testboard/1")
-      .then((res) => setBoard(res))
-      .catch((err) => setBoard(err));
+      .setRemote("127.0.0.1:26557")
+      .then((res) => {
+        setBoard(res)
+        console.warn("res ", JSON.stringify(res))
+      })
+      .catch((err) => setBoard("error " + JSON.stringify(err)));
   }, []);
 
 
   return (
     <View style={styles.container}>
       <Text>Flipppando</Text>
+      <TextInput multiline={true} numberOfLines={40} value={board} />
       <StatusBar style="auto" />
     </View>
   );
